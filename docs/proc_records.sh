@@ -26,19 +26,21 @@
 #
 # @see https://github.com/prog-it/Asterisk-CDR-Viewer-Mod
 # ------------------------------------------------------------------------------------------------------------------------------
+DAY_PER=$1
 
+for (( opday=1; opday <= $DAY_PER; i++ ))
+do
 ## Переменные для формирования путей к папкам с датами. НЕ изменять!
 # Год (2017)
 Y=`date +%Y`
 # Месяц (04)
-M=`date +%m -d "-1 day"`
+M=`date +%m -d "-$opday day"`
 # Вчерашнее число (27)
-D=`date +%d -d "-1 day"`
+D=`date +%d -d "-$opday day"`
 # Вчерашняя дата (2017-04)
-YM=`date +%Y-%m -d "-1 day"`
+YM=`date +%Y-%m -d "-$opday day"`
 # Вчерашняя дата (2017-04-27)
-YMD=`date +%Y-%m-%d -d "-1 day"`
-
+YMD=`date +%Y-%m-%d -d "-$opday day"`
 
 ## Папка, где находятся записи звонков. Например: "/var/calls/". СЛЕШ на конце!
 DIR_SOURCE="/var/calls/"
@@ -125,4 +127,4 @@ if [ "$CLEAN_OLD" == true ]; then
 		find "${DIR_SOURCE}" -type d -empty -exec rm -rf {} \;
 	fi
 fi
-
+done
